@@ -1,0 +1,97 @@
+This is part of a prop for a FILM.
+
+It is devided into:
+* LowLevel: RaspberryPi module and configurations
+    - Vertical Screen configuration
+    - Installation of foundation modules
+        - mosquitto
+        - C++ build-env
+        - python 3.7
+        - nginx
+        - bluetooth 
+    - Usage of the GPU transparently
+    - load the program at startup
+    - never sleep
+    - change the background to a black corridor
+    - remove all icons from screen
+    - remove all notifications
+    - remove all bars
+
+* MidLevel: Application that will put a toplayer with transparency over the backgound.
+    - top layer will have a "dashboard like" view that will populate the screen with data. 
+    - data about socials
+    - data about production qotas
+    - data about scheduling
+    
+* HighLevel: Application that will get the videos from the disk, load them into memory, and play them accordanly to connections from outside. Users must be able to change the animation at will with lettle to no effort and be able to display the frames as they appear.
+    - RestFULL: API to change between videos. 
+
+The flaskr application is a manager server that is able to load new animations to Animus and SOMA and can report who is connected where. 
+
+#connect device
+#This server receives a information about how the device is.
+"""
+{
+character:"Lauro",
+IP:"192.168.15.1",
+PORT:"80"
+type:"Injector",
+endpoints:["sick", "filling", "draining", "full", "die"]
+Animations:["sick", "filling", "draining", "full", "die"]
+}
+http request:
+post to http://<IP>:<PORT>/<endpoint>
+
+{
+character:"Animus",
+IP:"192.168.15.1",
+PORT:"80"
+type:"Messenger",
+endpoints:["Fundo", "Magistrado"]
+Animations:{
+    "window":[1080,1920],
+    "window_number":1,
+    "step_ms":200,
+    "ondemand_max":5,
+    
+    "sequences":[
+    {
+    "name":"Fundo",
+    "type":"permanent",
+    "order":"background",
+    "repeat":3,
+    "pos":{"x":0, "y":0,"w":800, "h":600},
+    "names":[
+    "/home/skiafa/workspace/VideoManager/pictures/sleep_1.png",
+    "/home/skiafa/workspace/VideoManager/pictures/sleep_2.png",
+    "/home/skiafa/workspace/VideoManager/pictures/sleep_3.png",
+    "/home/skiafa/workspace/VideoManager/pictures/sleep_4.png",
+    "/home/skiafa/workspace/VideoManager/pictures/sleep_5.png"
+    ],
+    "last_one":{
+        "has_last":true,
+        "file_name":"/home/skiafa/workspace/VideoManager/pictures/sleep_over.png"
+        }
+
+    },
+    {
+    "name":"Magistrado",
+    "type":"ondemand",
+    "order":"foreground",
+    "repeat":10,
+    "pos":{"x":0, "y":0,"w":800, "h":600},
+    "names":[
+    "/home/skiafa/workspace/VideoManager/pictures/sleep_1.png",
+    "/home/skiafa/workspace/VideoManager/pictures/sleep_2.png",
+    "/home/skiafa/workspace/VideoManager/pictures/sleep_3.png",
+    "/home/skiafa/workspace/VideoManager/pictures/sleep_4.png",
+    "/home/skiafa/workspace/VideoManager/pictures/sleep_5.png"
+    ],
+    "last_one":{
+        "has_last":true,
+        "file_name":"/home/skiafa/workspace/VideoManager/pictures/sleep_over.png"
+        }
+    }]
+}
+}
+"""

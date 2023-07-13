@@ -1,0 +1,19 @@
+This is the program that generate the images to be used inside the SOMA device.
+
+strait forward process
+
+record the messages with 4 cameras, or record 4 times
+* left hand
+* right hand
+* face
+* fullbody
+
+open the video and load the pictures.
+Reduce size by a factor of 5
+process the images to get the points.
+for every image generate the json for the points and create the image with alpha channel and the points in white
+save the images
+
+software used:
+mediapipe 
+opencv

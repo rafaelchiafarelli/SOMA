@@ -1,0 +1,14 @@
+[Unit]
+Description="Manager for devices and configurations"
+
+[Service]
+User=controlroom
+Group=controlroom
+WorkingDirectory=/etc/SOMA/
+VIRTUAL_ENV=/etc/SOMA/venv
+Environment=PATH=$VIRTUAL_ENV/bin:$PATH
+ExecStart=/etc/SOMA/assetc/manager.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

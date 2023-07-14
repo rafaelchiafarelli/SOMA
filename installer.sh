@@ -1,12 +1,10 @@
 #!/bin/bash
 
 
-apt install -y python3.8
-apt install -y python3.8-venv
-cp -r ../SOMA/ /etc/SOMA/
-echo "installing dependencies"
+sudo apt install -y python3.8
+sudo apt install -y python3.8-venv
 
-cd /etc/SOMA/
+echo "installing dependencies"
 
 python3.8 -m venv venv
 
@@ -19,11 +17,11 @@ echo "patch mediapipe"
 cp ./assets/face_mesh_connections.py ./venv/lib/python3.8/site-packages/mediapipe/python/solutions/face_mesh_connections.py
 cp ./assets/holistic.py ./venv/lib64/python3.8/site-packages/mediapipe/python/solutions/holistic.py
 echo "install service"
-systemctl stop manager.service
+sudo systemctl stop manager.service
 cp /etc/SOMA/assets/manager.service /etc/systemd/system/manager.service
-systemctl daemon-reload
-systemctl start manager.service
-systemctl enable manager.service
+sudo systemctl daemon-reload
+sudo systemctl start manager.service
+sudo systemctl enable manager.service
 
 
 

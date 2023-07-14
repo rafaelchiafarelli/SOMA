@@ -22,7 +22,7 @@ echo "install service"
 systemctl stop manager.service
 cp /etc/SOMA/assets/manager.service /etc/systemd/system/manager.service
 systemctl daemon-reload
-sysetmctl start manager.service
+systemctl start manager.service
 systemctl enable manager.service
 
 

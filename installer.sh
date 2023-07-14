@@ -5,7 +5,9 @@ sudo apt install -y python3.8
 sudo mkdir /etc/SOMA
 sudo cp -r ../SOMA/* /etc/SOMA/
 echo "installing dependencies"
+sudo su
 cd /etc/SOMA/
+
 python3.8 -m venv venv
 
 source ./venv/bin/activate

@@ -17,3 +17,18 @@ save the images
 software used:
 mediapipe 
 opencv
+
+
+
+tasks for today
+
+* make the paramiko sw that will copy files from the server to the device
+
+* create the sw that will process (mediapipe) and store localy on the server
+    * files will come from some folder (either a pendrive or a localy stored disk)
+    * files are jpg
+    * files created are png with alpha
+
+* create the sofware that will remove the background
+    * wither video or files will come from a sequence
+

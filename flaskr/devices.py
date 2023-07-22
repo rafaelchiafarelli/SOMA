@@ -23,16 +23,22 @@ def create():
         content = request.json
 
         if "type" not in content:
+            print("error in dev_type")
             return jsonify({"Error":"dev_type not present"})
         if "IP"  not in content:
+            print("error in dev_ip")
             return jsonify({"Error":"dev_IP not present"})
         if "PORT" not in content:
+            print("error in dev_port")
             return jsonify({"Error":"dev_PORT not present"})
         if "character" not in content:
+            print("error in character")
             return jsonify({"Error":"character not present"})
         if "endpoints" not in content:
+            print("error in endpoints")
             return jsonify({"Error":"endpoints not present"})
         if "animations" not in content:
+            print("error in animations")
             return jsonify({"Error":"animations not present"})
 
         dev_type = content["type"]
@@ -52,7 +58,7 @@ def create():
             (dev_type, dev_IP,dev_PORT,dev_character,endp,anim)
         )
         db.commit()
-        return "{}"
+        return {"job":"done"}   
 
     return "{}"
 

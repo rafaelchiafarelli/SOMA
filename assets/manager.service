@@ -3,11 +3,11 @@ Description="Manager for devices and configurations"
 
 [Service]
 User=controlroom
-Group=controlroom
-WorkingDirectory=~/SOMA/
-VIRTUAL_ENV=~/SOMA/venv
+Group=www-data
+WorkingDirectory=/home/controlroom/SOMA/
+VIRTUAL_ENV=/home/controlroom/SOMA/venv
 Environment=PATH=$VIRTUAL_ENV/bin:$PATH
-ExecStart=~/SOMA/assetc/manager.sh
+ExecStart=/home/controlroom/SOMA/assets/manager.sh
 Restart=on-failure
 RestartSec=5s
 

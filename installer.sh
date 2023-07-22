@@ -18,7 +18,7 @@ cp ./assets/face_mesh_connections.py ./venv/lib/python3.8/site-packages/mediapip
 cp ./assets/holistic.py ./venv/lib64/python3.8/site-packages/mediapipe/python/solutions/holistic.py
 echo "install service"
 sudo systemctl stop manager.service
-cp /etc/SOMA/assets/manager.service /etc/systemd/system/manager.service
+sudo cp ~/SOMA/assets/manager.service /etc/systemd/system/manager.service
 sudo systemctl daemon-reload
 sudo systemctl start manager.service
 sudo systemctl enable manager.service

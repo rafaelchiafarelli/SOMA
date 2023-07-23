@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}New Video{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="folder">Diretório que os arquivos devem ser armazenados</label>
+    <input name="folder" id="folder" value="{{ request.form['folder'] }}" required>
+    <label for="dest_folder">Diretório onde os arquivos ficarão</label>
+    <input name="dest_folder" id="dest_folder" value="{{ request.form['dest_folder'] }}" required>
+    <label for="dest_ip">IP do personagem na rede</label>
+    <input name="dest_ip" id="dest_ip" value="{{ request.form['dest_ip'] }}" required>
+    <label for="dest_user">Usuário do personagem para login</label>
+    <input name="dest_user" id="dest_user" value="{{ request.form['dest_user'] }}" required>
+    <label for="dest_password">senha do usuário para login</label>
+    <input name="dest_password" id="dest_password" value="{{ request.form['dest_password'] }}" required>
+    <label for="character_type">tipo do personagem</label>
+    <input name="character_type" id="character_type" value="{{ request.form['character_type'] }}" required>
+    
+    <input type="submit" value="Start">
+  </form>
+{% endblock %}

@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/controlroom/SOMA/
+cd /home/rafael/workspace/SOMA/
 source ./venv/bin/activate
-flask --app flaskr run init-db
+flask --app flaskr init-db
 flask --app flaskr run --debug

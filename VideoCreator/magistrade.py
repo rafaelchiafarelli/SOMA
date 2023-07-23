@@ -10,8 +10,11 @@ import sys
 
 import uuid
 
-
 import os.path
+
+import os, shutil
+import requests
+
 def main(VideoFileName, DestinationPath):
 
 	# Grabbing the Holistic Model from Mediapipe and
@@ -26,12 +29,15 @@ def main(VideoFileName, DestinationPath):
 	mp_drawing = mp.solutions.drawing_utils
 
 	# (0) in VideoCapture is used to connect to your computer's default camera
-	capture = cv2.VideoCapture(VideoFileName)
+	
+	capture = cv2.VideoCapture("{}/{}".format(DestinationPath,VideoFileName))
 
 	# Initializing current time and precious time for calculating the FPS
 	previousTime = 0
 	currentTime = 0
-
+	print("start")
+	file_counter = 0
+	
 	while capture.isOpened():
 		# capture frame by frame
 		ret, frame = capture.read()
@@ -136,8 +142,10 @@ def main(VideoFileName, DestinationPath):
 		# Set alpha channel in output
 		rgba[:, :, 3] = alpha
 
-
-		cv2.imwrite("{}/{}.png".format(DestinationPath,uuid.uuid4()), rgba)
+		png_file = "{}/{}_{}.png".format(DestinationPath,file_counter,VideoFileName)
+		print(png_file)
+		file_counter+=1
+		cv2.imwrite(png_file, rgba)
 		
 		cv2.imshow("Facial and Hand Landmarks", rgba)
 		
@@ -145,17 +153,19 @@ def main(VideoFileName, DestinationPath):
 		if cv2.waitKey(5) & 0xFF == ord('q'):
 			break
 
-
-		
-		
-
-
-
 	# When all the process is done
 	# Release the capture and destroy all windows
+	print("end")
 	capture.release()
 	cv2.destroyAllWindows()
+	tell_server(VideoFileName, DestinationPath)
 
+
+def tell_server(VideoFileName, DestinationPath):
+	url = 'http://localhost:5000/update_video'
+	myobj = {'Folder': DestinationPath, 'FileName': VideoFileName, 'cur_state':"processed"}
+	x = requests.post(url, json = myobj)
+	return
 
 # Get the arguments from the command-line except the filename
 argv = sys.argv[1:]
@@ -167,18 +177,18 @@ try:
 	
 	# Check if the options' length is 2 (can be enhanced)
 	if len(opts) == 0 or len(opts) > 3:
-		print ('usage: add.py -f <file name>')
+		print ('usage: add.py -f <file name> -d <destination>')
 	else:
-		if os.path.isfile(opts[0][1]) and os.path.isdir(opts[1][1]):
+		if os.path.isfile("{}/{}".format(opts[1][1],opts[0][1])) and os.path.isdir(opts[1][1]):
 			print("will try to process file: {} to the destination:{}".format(opts[0][1], opts[1][1]))
 			
 			main(opts[0][1], opts[1][1])
 		else:
-			print("file not fount")
+			print("{}/{} not fount ".format(opts[1][1], opts[0][1]))
 		
 		
 
 except getopt.GetoptError:
 	# Print something useful
-	print ('usage: add.py -a <first_operand> -b <second_operand>')
+	print ('usage: add.py -f <file name> -d <destination>')
 	sys.exit(2)	

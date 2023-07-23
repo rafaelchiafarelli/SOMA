@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}videos{% endblock %}</h1>
+  <a class="action" href="{{ url_for('video.create') }}">Create</a>
+{% endblock %}
+
+{% block content %}
+  {% for video in videos %}
+    <article class="post">
+      <header>
+        <div>
+          <h1>{{ video['folder'] }}</h1>
+          {% if video['cur_state'] != VideoState[1] %}
+            {% if video['cur_state'] != VideoState[3] %}
+              {% if video['cur_state'] != VideoState[5] %}
+                {% if video['cur_state'] != VideoState[6] %}
+          <form method="post">
+            <input name="folder" id="folder" value="{{ video['folder'] }}" hidden>
+            <input type="submit" value="Start">
+          </form>
+                {% endif %}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+          
+        </div>
+      </header>
+      <body>
+        <div>
+          <div class="about">File Name {{ video['file_name'] }}</div>
+          <div class="about">Created on {{ video['created'].strftime('%Y-%m-%d') }}</div>
+          <div class="about">Current State {{ video['cur_state'] }}</div>
+        </div>
+      </body>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

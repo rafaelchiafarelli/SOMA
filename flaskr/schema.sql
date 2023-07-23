@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS device;
+DROP TABLE IF EXISTS videos;
+
 
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -27,3 +29,16 @@ CREATE TABLE device (
   endpoints TEXT NOT NULL,
   animations TEXT NOT NULL
 );
+
+CREATE TABLE videos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  folder TEXT NOT NULL,
+  file_name TEXT NOT NULL,
+  dest_folder TEXT NOT NULL,
+  dest_ip TEXT NOT NULL,
+  dest_user TEXT NOT NULL,
+  dest_password TEXT NOT NULL,
+  character_type TEXT NOT NULL,
+  cur_state TEXT NOT NULL
+ );

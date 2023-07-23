@@ -1,3 +1,4 @@
+import uuid
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
@@ -7,7 +8,7 @@ from flaskr.auth import login_required
 from flaskr.db import get_db
 
 bp = Blueprint('blog', __name__)
-
+#change the index to show the pages
 @bp.route('/')
 def index():
     db = get_db()
@@ -33,15 +34,16 @@ def create():
             flash(error)
         else:
             db = get_db()
+            
             db.execute(
-                'INSERT INTO post (title, body, author_id)'
+                'INSERT INTO video (folder, body, author_id)'
                 ' VALUES (?, ?, ?)',
                 (title, body, g.user['id'])
             )
             db.commit()
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('video.index'))
 
-    return render_template('blog/create.html')
+    return render_template('video/create.html')
 
 
 def get_post(id, check_author=True):

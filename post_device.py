@@ -1,5 +1,5 @@
 import requests
-res = requests.post('http://localhost:5000/device_register', json={ "character":"Animus",
+res = requests.post('http://localhost:5000/device_register', json={ "character":"SOMA",
 "IP":"192.168.15.1",
 "PORT":"80",
 "type":"Messenger",

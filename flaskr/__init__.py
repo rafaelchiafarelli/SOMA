@@ -34,6 +34,10 @@ def create_app(test_config=None):
     from . import devices
     app.register_blueprint(devices.bp)
 
+    from . import video
+    app.register_blueprint(video.bp)
+
+
     from . import blog
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
